@@ -1,0 +1,20 @@
+Idea of game
+-- Skier hitting down the slope, while avoiding obstacles and collecting goods;
+-- Score (distance and collecting goods; high scores; 
+-- Different levels (blue, red, black slope --> more obstacles, faster slope)
+
+
+MVP v1
+[] Playboard: slope, background, border
+[] class Game
+[] class Player
+[] class Obstacles
+[] collision with obstacles --> game over
+[] control with arrow keys --> addEventListeners 
+[] Logic winning/losing
+[] Deploy on GitHub pages
+
+MVP v2
+[] class Goods
+[] define Score (calculate, display score)
+[] collision with goods -> increase score 
