@@ -18,6 +18,11 @@ body {
 
 .obstacle {
   /*todo: replace with tree or so*/
-  background-color: teal;
+  background-color: rgb(141, 8, 8);
+  position: absolute;
+}
+
+.goodie {
+  background-color: rgb(27, 196, 145);
   position: absolute;
 }
