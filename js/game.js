@@ -53,6 +53,7 @@ class Game {
         if (this.collision(this.player, elm)) {
           this.score += 100;
           console.log(this.score);
+          this.printScore();
         }
         elm.removeGoodie(elm);
       });
@@ -83,6 +84,7 @@ class Game {
     board.appendChild(htmlTag);
     return htmlTag;
   }
+
   drawDomElm(instance) {
     instance.domElement.style.left = instance.positionX + "vw";
     instance.domElement.style.bottom = instance.positionY + "vh";
@@ -97,6 +99,11 @@ class Game {
     ) {
       return true;
     }
+  }
+
+  printScore() {
+    let score = document.querySelector(".score span");
+    score.innerText = this.score;
   }
 }
 

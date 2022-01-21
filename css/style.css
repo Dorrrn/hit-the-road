@@ -26,3 +26,10 @@ body {
   background-color: rgb(27, 196, 145);
   position: absolute;
 }
+
+.score {
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+    font-size: 50px;
+    font-weight: 600;
+
+}
