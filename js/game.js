@@ -1,6 +1,7 @@
 class Game {
   constructor() {
     this.obstaclesArr = [];
+    this.goodiesArr = [];
     this.timer = 0;
   }
   start() {
@@ -11,6 +12,7 @@ class Game {
 
     this.addEventListeners();
 
+    // setInterval for obstacles
     setInterval(() => {
       this.timer++;
 
@@ -28,7 +30,27 @@ class Game {
         this.collision(this.player, elm);
         elm.removeObstacle(elm);
       });
-    }, 2000);
+    }, 1000);
+
+    // setInterval for goodies - maybe have it in one
+    setInterval(() => {
+      this.timer++;
+
+      if (this.timer % 4 === 0) {
+        // create obstacle
+        const newGoodie = new Goodie();
+        this.goodiesArr.push(newGoodie);
+        newGoodie.domElement = this.createDomElm(newGoodie);
+        this.drawDomElm(newGoodie);
+      }
+      //move all obstacles to obstaclesArr
+      this.goodiesArr.forEach((elm) => {
+        elm.moveDown();
+        this.drawDomElm(elm);
+        this.collision(this.player, elm);
+        elm.removeGoodie(elm);
+      });
+    }, 1000);
   }
 
   addEventListeners() {
@@ -88,16 +110,17 @@ class Player {
 class Obstacle {
   constructor() {
     this.className = "obstacle";
-    this.positionX = Math.random() * (50 - 30) + 50; //Math.random() * (max - min) + min
-    this.positionY = 80;
+    this.positionX = Math.random() * (30 - 20) + 30; //Math.random() * (max - min) + min
+    this.positionY = 85;
     this.width = 3;
     this.height = 3;
     this.domElement = null;
   }
   moveDown() {
     this.positionY -= 10;
-    this.width += 10;
-    this.height += 10;
+    this.positionX -= 5;
+    // this.width += 10; should increase size, while moving down
+    // this.height += 10;
     //console.log("moving down.... current poistion: " + this.positionX);
   }
   removeObstacle(elm) {
@@ -107,7 +130,27 @@ class Obstacle {
   }
 }
 
-class Goods {}
+class Goodie {
+  constructor() {
+    this.className = "goodie";
+    this.positionX = Math.random() * (30 - 20) + 30; //Math.random() * (max - min) + min
+    this.positionY = 85;
+    this.width = 5;
+    this.height = 5;
+    this.domElement = null;
+  }
+  moveDown() {
+    this.positionY -= 10;
+    this.positionX += 5; // should move either left or right -=5
+    // this.width += 5;
+    // this.height += 5;
+  }
+  removeGoodie(elm) {
+    if (elm.positionY < 0) {
+      elm.domElement.remove();
+    }
+  }
+}
 
 const game = new Game();
 game.start();
