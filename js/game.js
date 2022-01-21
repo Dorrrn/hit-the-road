@@ -112,15 +112,15 @@ class Player {
     this.className = "player";
     this.positionX = 0;
     this.positionY = 5;
-    this.width = 15;
-    this.height = 20;
+    this.width = 50;
+    this.height = 30;
     this.domElement = null;
   }
   moveLeft() {
-    this.positionX -= 10;
+    this.positionX -= 5;
   }
   moveRight() {
-    this.positionX += 10;
+    this.positionX += 5;
   }
 }
 
@@ -129,8 +129,8 @@ class Obstacle {
     this.className = "obstacle";
     this.positionX = Math.random() * (30 - 20) + 30; //Math.random() * (max - min) + min
     this.positionY = 85;
-    this.width = 3;
-    this.height = 3;
+    this.width = 4;
+    this.height = 4;
     this.domElement = null;
   }
   moveDown() {
@@ -138,7 +138,6 @@ class Obstacle {
     this.positionX -= 5;
     // this.width += 10; should increase size, while moving down
     // this.height += 10;
-    //console.log("moving down.... current poistion: " + this.positionX);
   }
   removeObstacle(elm) {
     if (elm.positionY < 0) {
@@ -152,8 +151,8 @@ class Goodie {
     this.className = "goodie";
     this.positionX = Math.random() * (30 - 20) + 30; //Math.random() * (max - min) + min
     this.positionY = 85;
-    this.width = 5;
-    this.height = 5;
+    this.width = 13;
+    this.height = 13;
     this.domElement = null;
   }
   moveDown() {

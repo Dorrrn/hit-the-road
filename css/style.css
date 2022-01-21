@@ -12,18 +12,22 @@ body {
 
 .player {
   position: absolute;
-  background-image: url("/images/skierv1.jpg");
+  background-image: url("/images/skier-turn-left.svg");
   /* todo: resize player ! */
+  
+  
 }
 
 .obstacle {
   /*todo: replace with tree or so*/
-  background-color: rgb(141, 8, 8);
+  /*background-color: rgb(141, 8, 8);*/
+  background-image: url("/images/tree.svg");
   position: absolute;
 }
 
 .goodie {
-  background-color: rgb(27, 196, 145);
+  /*background-color: rgb(27, 196, 145);*/
+  background-image: url("/images/logo_iron_ski.png");
   position: absolute;
 }
 
