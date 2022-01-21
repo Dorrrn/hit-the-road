@@ -3,6 +3,7 @@ class Game {
     this.obstaclesArr = [];
     this.goodiesArr = [];
     this.timer = 0;
+    this.score = 0;
   }
   start() {
     // create player
@@ -27,7 +28,9 @@ class Game {
       this.obstaclesArr.forEach((elm) => {
         elm.moveDown();
         this.drawDomElm(elm);
-        this.collision(this.player, elm);
+        if (this.collision(this.player, elm)) {
+          this.stop();
+        }
         elm.removeObstacle(elm);
       });
     }, 1000);
@@ -47,10 +50,17 @@ class Game {
       this.goodiesArr.forEach((elm) => {
         elm.moveDown();
         this.drawDomElm(elm);
-        this.collision(this.player, elm);
+        if (this.collision(this.player, elm)) {
+          this.score += 100;
+          console.log(this.score);
+        }
         elm.removeGoodie(elm);
       });
     }, 1000);
+  }
+
+  stop() {
+    //alert("Oh noooooo :(");
   }
 
   addEventListeners() {
@@ -85,7 +95,7 @@ class Game {
       instance2.positionX < instance1.positionX + instance1.width &&
       instance2.positionY < instance1.positionY + instance1.height
     ) {
-      console.log("oh nooooo");
+      return true;
     }
   }
 }
