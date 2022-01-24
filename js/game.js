@@ -54,6 +54,7 @@ class Game {
           this.score += 100;
           console.log(this.score);
           this.printScore();
+          elm.domElement.remove();
         }
         elm.removeObstacle(elm);
       });
@@ -110,10 +111,10 @@ class Game {
 class Player {
   constructor() {
     this.className = "player";
-    this.positionX = 0;
-    this.positionY = 5;
     this.width = 10;
     this.height = 20;
+    this.positionX = (100 - this.width) / 2;
+    this.positionY = 6;
     this.domElement = null;
   }
   moveLeft() {
@@ -124,65 +125,40 @@ class Player {
   }
 }
 
-// class Obstacle {
-//   constructor() {
-//     this.className = "obstacle";
-//     this.positionX = Math.random() * (40 - 25) + 40; //Math.random() * (max - min) + min
-//     this.positionY = 85;
-//     this.width = 5;
-//     this.height = 5;
-//     this.domElement = null;
-//   }
-//   moveDown() {
-//     this.positionY -= 10;
-//     this.positionX -= 5;
-//     // this.width += 10; should increase size, while moving down
-//     // this.height += 10;
-//   }
-//   removeObstacle(elm) {
-//     if (elm.positionY < 0) {
-//       elm.domElement.remove();
-//     }
-//   }
-// }
+// Array with 6 different paths for obstacle to start from and moveDown
+let path = [
+  { startPosition: 36, moveDownX: -4, moveDownY: 10 },
+  { startPosition: 40, moveDownX: -3, moveDownY: 10 },
+  { startPosition: 44, moveDownX: -2, moveDownY: 10 },
+  { startPosition: 48, moveDownX: 2, moveDownY: 10 },
+  { startPosition: 52, moveDownX: 3, moveDownY: 10 },
+  { startPosition: 56, moveDownX: 4, moveDownY: 10 },
+];
 
-// class Goodie {
-//   constructor() {
-//     this.className = "goodie";
-//     this.positionX = Math.random() * (40 - 25) + 40; //Math.random() * (max - min) + min
-//     this.positionY = 85;
-//     this.width = 5;
-//     this.height = 5;
-//     this.domElement = null;
-//   }
-//   moveDown() {
-//     this.positionY -= 10;
-//     this.positionX += 5; // should move either left or right -=5
-//     // this.width += 5;
-//     // this.height += 5;
-//   }
-//   removeGoodie(elm) {
-//     if (elm.positionY < 0) {
-//       elm.domElement.remove();
-//     }
-//   }
-// }
+// console.log(path[Math.floor(Math.random() * path.length)]);
+//console.log(Math.floor(Math.random() * (Math.floor(6) - Math.ceil(1) + 1)) + Math.ceil(1));
+//console.log(path[2].startPosition)
 
 class ParentObstacle {
   constructor() {
-    this.positionX = Math.random() * (40 - 25) + 40;
+    // random number between 1-6
+    this.randomPath =
+      Math.floor(Math.random() * (Math.floor(6) - Math.ceil(1) + 1)) +
+      Math.ceil(1);
+    this.positionX = path[this.randomPath].startPosition;
     this.positionY = 75;
-    this.width = 5;
-    this.height = 10;
+    this.width = 4;
+    this.height = 8;
     this.domElement = null;
   }
 
   moveDown() {
-    this.positionY -= 10;
-    this.positionX += 5;
+    this.positionY -= path[this.randomPath].moveDownY;
+    this.positionX += path[this.randomPath].moveDownX;
   }
+
   removeObstacle(elm) {
-    if (elm.positionY < 0) {
+    if (elm.positionY < 5) {
       elm.domElement.remove();
     }
   }
@@ -201,6 +177,38 @@ class Goodie extends ParentObstacle {
     this.className = "goodie";
   }
 }
+
+// let obstaclePath = [
+//   { this.positionX: 35,
+//      moveDownY: this.positionY - 10,
+//     moveDownX: this.positionX - 4
+//   },
+//   {
+//     this.positionX: 39,
+//     moveDownY: this.positionY - 10,
+//     moveDownX: this.positionX - 3,
+//   },
+//  {
+//     this.positionX: 43,
+//     moveDownY: this.positionY - 10,
+//     moveDownX: this.positionX - 2,
+//   },
+//  {
+//     this.positionX: 47,
+//     moveDownY: this.positionY - 10,
+//     moveDownX: this.positionX + 2,
+//   },
+//  {
+//     this.positionX: 51,
+//     moveDownY: this.positionY - 10,
+//     moveDownX: this.positionX + 3,
+//   },
+//  {
+//     this.positionX: 54,
+//     moveDownY: this.positionY - 10,
+//     moveDownX: this.positionX + 4,
+//   },
+// ];
 
 const game = new Game();
 game.start();
