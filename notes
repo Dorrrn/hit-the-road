@@ -6,15 +6,21 @@ Idea of game
 
 MVP v1
 [] Playboard: slope, background, border
-[] class Game
+[x] class Game
 [] class Player
+[] Parent Class Obstacles
 [] class Obstacles
-[] collision with obstacles --> game over
-[] control with arrow keys --> addEventListeners 
+[] class Goodies
+[x] collision with obstacles --> game over
+[x] control with arrow keys --> addEventListeners 
 [] Logic winning/losing
-[] Deploy on GitHub pages
-
-MVP v2
-[] class Goods
 [] define Score (calculate, display score)
 [] collision with goods -> increase score 
+[] several paths for obstacles
+[] images for player, obstacles, goodies
+[] Deploy on GitHub pages
+
+
+[] Higher levels (obstacles moving faster)
+[] Distance score
+

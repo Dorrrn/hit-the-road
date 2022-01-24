@@ -55,7 +55,7 @@ class Game {
           console.log(this.score);
           this.printScore();
         }
-        elm.removeGoodie(elm);
+        elm.removeObstacle(elm);
       });
     }, 1000);
   }
@@ -112,8 +112,8 @@ class Player {
     this.className = "player";
     this.positionX = 0;
     this.positionY = 5;
-    this.width = 50;
-    this.height = 30;
+    this.width = 10;
+    this.height = 20;
     this.domElement = null;
   }
   moveLeft() {
@@ -124,20 +124,62 @@ class Player {
   }
 }
 
-class Obstacle {
+// class Obstacle {
+//   constructor() {
+//     this.className = "obstacle";
+//     this.positionX = Math.random() * (40 - 25) + 40; //Math.random() * (max - min) + min
+//     this.positionY = 85;
+//     this.width = 5;
+//     this.height = 5;
+//     this.domElement = null;
+//   }
+//   moveDown() {
+//     this.positionY -= 10;
+//     this.positionX -= 5;
+//     // this.width += 10; should increase size, while moving down
+//     // this.height += 10;
+//   }
+//   removeObstacle(elm) {
+//     if (elm.positionY < 0) {
+//       elm.domElement.remove();
+//     }
+//   }
+// }
+
+// class Goodie {
+//   constructor() {
+//     this.className = "goodie";
+//     this.positionX = Math.random() * (40 - 25) + 40; //Math.random() * (max - min) + min
+//     this.positionY = 85;
+//     this.width = 5;
+//     this.height = 5;
+//     this.domElement = null;
+//   }
+//   moveDown() {
+//     this.positionY -= 10;
+//     this.positionX += 5; // should move either left or right -=5
+//     // this.width += 5;
+//     // this.height += 5;
+//   }
+//   removeGoodie(elm) {
+//     if (elm.positionY < 0) {
+//       elm.domElement.remove();
+//     }
+//   }
+// }
+
+class ParentObstacle {
   constructor() {
-    this.className = "obstacle";
-    this.positionX = Math.random() * (30 - 20) + 30; //Math.random() * (max - min) + min
-    this.positionY = 85;
-    this.width = 4;
-    this.height = 4;
+    this.positionX = Math.random() * (40 - 25) + 40;
+    this.positionY = 75;
+    this.width = 5;
+    this.height = 10;
     this.domElement = null;
   }
+
   moveDown() {
     this.positionY -= 10;
-    this.positionX -= 5;
-    // this.width += 10; should increase size, while moving down
-    // this.height += 10;
+    this.positionX += 5;
   }
   removeObstacle(elm) {
     if (elm.positionY < 0) {
@@ -146,25 +188,17 @@ class Obstacle {
   }
 }
 
-class Goodie {
-  constructor() {
+class Obstacle extends ParentObstacle {
+  constructor(positionX, positionY, width, height, domElement) {
+    super(positionX, positionY, width, height, domElement);
+    this.className = "obstacle";
+  }
+}
+
+class Goodie extends ParentObstacle {
+  constructor(positionX, positionY, width, height, domElement) {
+    super(positionX, positionY, width, height, domElement);
     this.className = "goodie";
-    this.positionX = Math.random() * (30 - 20) + 30; //Math.random() * (max - min) + min
-    this.positionY = 85;
-    this.width = 13;
-    this.height = 13;
-    this.domElement = null;
-  }
-  moveDown() {
-    this.positionY -= 10;
-    this.positionX += 5; // should move either left or right -=5
-    // this.width += 5;
-    // this.height += 5;
-  }
-  removeGoodie(elm) {
-    if (elm.positionY < 0) {
-      elm.domElement.remove();
-    }
   }
 }
 

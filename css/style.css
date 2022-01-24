@@ -1,20 +1,29 @@
 body {
   padding: 0;
   margin: 0;
+  overflow: hidden;
+  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
 }
 
 #board {
   /* todo: make board smaller */
   background-image: url("/images/board-background.jpg");
   background-size: cover;
-  height: 100vh;
+  height: 80vh;
+  width: 80vw;
+  margin: 5vw 0vw 5vh 10vw;
+  z-index: 1;
+  background-size: 80;
+  border: 15px solid rgb(146, 147, 190)
 }
 
 .player {
   position: absolute;
-  background-image: url("/images/skier-turn-left.svg");
+  background-repeat: no-repeat; 
+  background-size: 7vw;
+  background-image: url("/images/skier-turn-left.svg"); 
+  /*background-color: rgb(30, 12, 134);*/
   /* todo: resize player ! */
-  
   
 }
 
@@ -23,17 +32,23 @@ body {
   /*background-color: rgb(141, 8, 8);*/
   background-image: url("/images/tree.svg");
   position: absolute;
+  background-size: 4vw;
+  background-repeat: no-repeat;
 }
 
 .goodie {
   /*background-color: rgb(27, 196, 145);*/
   background-image: url("/images/logo_iron_ski.png");
   position: absolute;
+  background-size: 4vw;
+  background-repeat: no-repeat;
 }
 
 .score {
-    font-family:Verdana, Geneva, Tahoma, sans-serif
-    font-size: 50px;
+    padding-top: 20px;
+    padding-left: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
     font-weight: 600;
 
 }
