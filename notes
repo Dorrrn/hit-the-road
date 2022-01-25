@@ -4,23 +4,27 @@ Idea of game
 -- Different levels (blue, red, black slope --> more obstacles, faster slope)
 
 
-MVP v1
+MVP
 [] Playboard: slope, background, border
 [x] class Game
-[] class Player
-[] Parent Class Obstacles
-[] class Obstacles
-[] class Goodies
+[x] class Player
+[x] Parent Class Obstacles
+    [x] class Obstacles
+    [x] class Goodies
 [x] collision with obstacles --> game over
 [x] control with arrow keys --> addEventListeners 
 [] Logic winning/losing
-[] define Score (calculate, display score)
-[] collision with goods -> increase score 
-[] several paths for obstacles
-[] images for player, obstacles, goodies
+[x] define Score (calculate, display score)
+[x] collision with goodies -> increase score 
+[x] several random paths for obstacles
+    [] make moving down smoother
+[x] images for player, obstacles, goodies
 [] Deploy on GitHub pages
 
-
+Improvements
+[] Obstacles getting bigger, the closer they come
 [] Higher levels (obstacles moving faster)
 [] Distance score
+[] Start button or by hitting keys
+[] Game over screen with displaying Score and level
 

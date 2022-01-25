@@ -3,8 +3,11 @@ class Game {
     this.obstaclesArr = [];
     this.goodiesArr = [];
     this.timer = 0;
+    this.refreshRate = 1000 / 5; //60 frames per second
+    this.obstacleFrequency = 10;
     this.score = 0;
   }
+
   start() {
     // create player
     this.player = new Player(); //create an instance of the Player
@@ -17,7 +20,8 @@ class Game {
     setInterval(() => {
       this.timer++;
 
-      if (this.timer % 3 === 0) {
+      // somehow only works when 3 ????
+      if (this.timer % 15 === 0) {
         // create obstacle
         const newObstacle = new Obstacle();
         this.obstaclesArr.push(newObstacle);
@@ -33,13 +37,13 @@ class Game {
         }
         elm.removeObstacle(elm);
       });
-    }, 1000);
+    }, 200);
 
     // setInterval for goodies - maybe have it in one
     setInterval(() => {
       this.timer++;
 
-      if (this.timer % 4 === 0) {
+      if (this.timer % 30 === 0) {
         // create obstacle
         const newGoodie = new Goodie();
         this.goodiesArr.push(newGoodie);
@@ -51,14 +55,11 @@ class Game {
         elm.moveDown();
         this.drawDomElm(elm);
         if (this.collision(this.player, elm)) {
-          this.score += 100;
-          console.log(this.score);
-          this.printScore();
-          elm.domElement.remove();
+          this.countScore(this.player, elm);
         }
         elm.removeObstacle(elm);
       });
-    }, 1000);
+    }, 200);
   }
 
   stop() {
@@ -87,8 +88,8 @@ class Game {
   }
 
   drawDomElm(instance) {
-    instance.domElement.style.left = instance.positionX + "vw";
-    instance.domElement.style.bottom = instance.positionY + "vh";
+    instance.domElement.style.left = instance.positionX + "%";
+    instance.domElement.style.bottom = instance.positionY + "%";
   }
 
   collision(instance1, instance2) {
@@ -98,41 +99,54 @@ class Game {
       instance2.positionX < instance1.positionX + instance1.width &&
       instance2.positionY < instance1.positionY + instance1.height
     ) {
+      instance2.domElement.remove();
       return true;
     }
   }
 
-  printScore() {
-    let score = document.querySelector(".score span");
-    score.innerText = this.score;
+  countScore(instance1, instance2) {
+    if (this.collision(instance1, instance2)) {
+      this.score += 100;
+      let score = document.querySelector(".score span");
+      score.innerText = this.score;
+    }
   }
+
+  //   printScore() {
+  //     let score = document.querySelector(".score span");
+  //     score.innerText = this.score;
+  //   }
 }
 
 class Player {
   constructor() {
     this.className = "player";
-    this.width = 10;
+    this.width = 6;
     this.height = 20;
-    this.positionX = (100 - this.width) / 2;
-    this.positionY = 6;
+    this.positionX = 38;
+    this.positionY = 0;
     this.domElement = null;
   }
   moveLeft() {
-    this.positionX -= 5;
+    if (this.positionX > 5) {
+      this.positionX -= 5;
+    }
   }
   moveRight() {
-    this.positionX += 5;
+    if (this.positionX < 88) {
+      this.positionX += 5;
+    }
   }
 }
 
 // Array with 6 different paths for obstacle to start from and moveDown
-let path = [
-  { startPosition: 36, moveDownX: -4, moveDownY: 10 },
-  { startPosition: 40, moveDownX: -3, moveDownY: 10 },
-  { startPosition: 44, moveDownX: -2, moveDownY: 10 },
-  { startPosition: 48, moveDownX: 2, moveDownY: 10 },
-  { startPosition: 52, moveDownX: 3, moveDownY: 10 },
-  { startPosition: 56, moveDownX: 4, moveDownY: 10 },
+let obstaclesPath = [
+  { startPosition: 36, moveDownX: -1.5, moveDownY: 1 },
+  { startPosition: 40, moveDownX: -0.8, moveDownY: 1 },
+  { startPosition: 44, moveDownX: -0.3, moveDownY: 1 },
+  { startPosition: 48, moveDownX: 0.3, moveDownY: 1 },
+  { startPosition: 52, moveDownX: 0.8, moveDownY: 1 },
+  { startPosition: 56, moveDownX: 1.5, moveDownY: 1 },
 ];
 
 // console.log(path[Math.floor(Math.random() * path.length)]);
@@ -145,20 +159,18 @@ class ParentObstacle {
     this.randomPath =
       Math.floor(Math.random() * (Math.floor(6) - Math.ceil(1) + 1)) +
       Math.ceil(1);
-    this.positionX = path[this.randomPath].startPosition;
-    this.positionY = 75;
-    this.width = 4;
-    this.height = 8;
+    this.positionX = obstaclesPath[this.randomPath].startPosition;
+    this.positionY = 45;
     this.domElement = null;
   }
 
   moveDown() {
-    this.positionY -= path[this.randomPath].moveDownY;
-    this.positionX += path[this.randomPath].moveDownX;
+    this.positionY -= obstaclesPath[this.randomPath].moveDownY;
+    this.positionX += obstaclesPath[this.randomPath].moveDownX;
   }
 
   removeObstacle(elm) {
-    if (elm.positionY < 5) {
+    if (elm.positionX < 0 || elm.positionY < 0 || elm.positionX > 96) {
       elm.domElement.remove();
     }
   }
@@ -168,6 +180,8 @@ class Obstacle extends ParentObstacle {
   constructor(positionX, positionY, width, height, domElement) {
     super(positionX, positionY, width, height, domElement);
     this.className = "obstacle";
+    this.width = 3;
+    this.height = 10;
   }
 }
 
@@ -175,40 +189,16 @@ class Goodie extends ParentObstacle {
   constructor(positionX, positionY, width, height, domElement) {
     super(positionX, positionY, width, height, domElement);
     this.className = "goodie";
+    this.width = 3;
+    this.height = 8;
   }
 }
 
-// let obstaclePath = [
-//   { this.positionX: 35,
-//      moveDownY: this.positionY - 10,
-//     moveDownX: this.positionX - 4
-//   },
-//   {
-//     this.positionX: 39,
-//     moveDownY: this.positionY - 10,
-//     moveDownX: this.positionX - 3,
-//   },
-//  {
-//     this.positionX: 43,
-//     moveDownY: this.positionY - 10,
-//     moveDownX: this.positionX - 2,
-//   },
-//  {
-//     this.positionX: 47,
-//     moveDownY: this.positionY - 10,
-//     moveDownX: this.positionX + 2,
-//   },
-//  {
-//     this.positionX: 51,
-//     moveDownY: this.positionY - 10,
-//     moveDownX: this.positionX + 3,
-//   },
-//  {
-//     this.positionX: 54,
-//     moveDownY: this.positionY - 10,
-//     moveDownX: this.positionX + 4,
-//   },
-// ];
+// const levels = [
+//     { score: 1500, speed: xx},
+//     { score: 3000, speed: xx},
+//     { score: 5000, speed: xx}
+// ]
 
 const game = new Game();
 game.start();
