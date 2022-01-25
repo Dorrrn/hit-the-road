@@ -33,7 +33,7 @@ class Game {
         elm.moveDown();
         this.drawDomElm(elm);
         if (this.collision(this.player, elm)) {
-          this.stop();
+          //this.stop();
         }
         elm.removeObstacle(elm);
       });
@@ -56,6 +56,8 @@ class Game {
         this.drawDomElm(elm);
         if (this.collision(this.player, elm)) {
           this.countScore();
+          this.removeArrElm(this.goodiesArr, elm);
+          elm.domElement.remove();
         }
         elm.removeObstacle(elm);
       });
@@ -65,8 +67,8 @@ class Game {
   stop() {
     //alert("Oh noooooo :(");
     // Undisplay divs from board
-    let boardDiv = document.getElementById("board");
-    boardDiv.style.display = "none";
+    let gameDiv = document.getElementById("game");
+    gameDiv.style.display = "none";
 
     let headlineDiv = document.getElementById("headline");
     headlineDiv.style.display = "none";
@@ -111,6 +113,13 @@ class Game {
     instance.domElement.style.bottom = instance.positionY + "%";
   }
 
+  removeArrElm(arr, elm) {
+    let index = arr.indexOf(elm);
+    if (index > -1) {
+      arr.splice(index, 1);
+    }
+  }
+
   collision(instance1, instance2) {
     if (
       instance1.positionX < instance2.positionX + instance2.width &&
@@ -118,7 +127,6 @@ class Game {
       instance2.positionX < instance1.positionX + instance1.width &&
       instance2.positionY < instance1.positionY + instance1.height
     ) {
-      instance2.domElement.remove();
       return true;
     }
   }
