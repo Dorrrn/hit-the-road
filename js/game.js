@@ -21,7 +21,7 @@ class Game {
       this.timer++;
 
       // somehow only works when 3 ????
-      if (this.timer % 15 === 0) {
+      if (this.timer % 30 === 0) {
         // create obstacle
         const newObstacle = new Obstacle();
         this.obstaclesArr.push(newObstacle);
@@ -37,7 +37,7 @@ class Game {
         }
         elm.removeObstacle(elm);
       });
-    }, 200);
+    }, 100);
 
     // setInterval for goodies - maybe have it in one
     setInterval(() => {
@@ -55,15 +55,34 @@ class Game {
         elm.moveDown();
         this.drawDomElm(elm);
         if (this.collision(this.player, elm)) {
-          this.countScore(this.player, elm);
+          this.countScore();
         }
         elm.removeObstacle(elm);
       });
-    }, 200);
+    }, 80);
   }
 
   stop() {
     //alert("Oh noooooo :(");
+    // Undisplay divs from board
+    let boardDiv = document.getElementById("board");
+    boardDiv.style.display = "none";
+
+    let headlineDiv = document.getElementById("headline");
+    headlineDiv.style.display = "none";
+
+    // let obstalcesDiv = document.getElementById("obstacle");
+    // obstalcesDiv.style.display = "none";
+    // let goodiesDiv = document.getElementById("goodie");
+    // goodiesDiv.style.display = "none";
+    // let playerDiv = document.getElementById("player");
+    // playerDiv.style.display = "none";
+    // let scoreDiv = document.getElementById("score");
+    // scoreDiv.style.display = "none";
+
+    // Display game-over divs
+    let gameOverDiv = document.getElementById("game-over");
+    gameOverDiv.style.display = "block";
   }
 
   addEventListeners() {
@@ -104,18 +123,11 @@ class Game {
     }
   }
 
-  countScore(instance1, instance2) {
-    if (this.collision(instance1, instance2)) {
-      this.score += 100;
-      let score = document.querySelector(".score span");
-      score.innerText = this.score;
-    }
+  countScore() {
+    this.score += 100;
+    let score = document.querySelector(".score span");
+    score.innerText = this.score;
   }
-
-  //   printScore() {
-  //     let score = document.querySelector(".score span");
-  //     score.innerText = this.score;
-  //   }
 }
 
 class Player {
@@ -148,10 +160,6 @@ let obstaclesPath = [
   { startPosition: 52, moveDownX: 0.8, moveDownY: 1 },
   { startPosition: 56, moveDownX: 1.5, moveDownY: 1 },
 ];
-
-// console.log(path[Math.floor(Math.random() * path.length)]);
-//console.log(Math.floor(Math.random() * (Math.floor(6) - Math.ceil(1) + 1)) + Math.ceil(1));
-//console.log(path[2].startPosition)
 
 class ParentObstacle {
   constructor() {
