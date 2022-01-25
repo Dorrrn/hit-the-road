@@ -3,32 +3,28 @@ class Game {
     this.obstaclesArr = [];
     this.goodiesArr = [];
     this.timer = 0;
-    this.refreshRate = 1000 / 5; //60 frames per second
-    this.obstacleFrequency = 10;
     this.score = 0;
+    // this.refreshRate = 1000 / 5;
+    // this.obstacleFrequency = 10;
   }
 
   start() {
-    // create player
-    this.player = new Player(); //create an instance of the Player
-    this.player.domElement = this.createDomElm(this.player); //create DOM element for the player
+    this.player = new Player();
+    this.player.domElement = this.createDomElm(this.player);
     this.drawDomElm(this.player);
-
     this.addEventListeners();
 
     // setInterval for obstacles
     setInterval(() => {
       this.timer++;
 
-      // somehow only works when 3 ????
       if (this.timer % 30 === 0) {
-        // create obstacle
         const newObstacle = new Obstacle();
         this.obstaclesArr.push(newObstacle);
         newObstacle.domElement = this.createDomElm(newObstacle);
         this.drawDomElm(newObstacle);
       }
-      //move all obstacles to obstaclesArr
+
       this.obstaclesArr.forEach((elm) => {
         elm.moveDown();
         this.drawDomElm(elm);
@@ -37,42 +33,40 @@ class Game {
         }
         elm.removeObstacle(elm);
       });
-    }, 100);
+    }, 80);
 
-    // setInterval for goodies - maybe have it in one
+    // setInterval for goodies
     setInterval(() => {
       this.timer++;
 
-      if (this.timer % 30 === 0) {
-        // create obstacle
+      if (this.timer % 180 === 0) {
         const newGoodie = new Goodie();
         this.goodiesArr.push(newGoodie);
         newGoodie.domElement = this.createDomElm(newGoodie);
         this.drawDomElm(newGoodie);
       }
-      //move all obstacles to obstaclesArr
       this.goodiesArr.forEach((elm) => {
         elm.moveDown();
         this.drawDomElm(elm);
         if (this.collision(this.player, elm)) {
           this.countScore();
-          this.removeArrElm(this.goodiesArr, elm);
+          this.removeElmFromArr(this.goodiesArr, elm);
           elm.domElement.remove();
         }
         elm.removeObstacle(elm);
       });
-    }, 80);
+    }, 60);
   }
 
   stop() {
     //alert("Oh noooooo :(");
+
     // Undisplay divs from board
     let gameDiv = document.getElementById("game");
     gameDiv.style.display = "none";
 
-    let headlineDiv = document.getElementById("headline");
-    headlineDiv.style.display = "none";
-
+    // let headlineDiv = document.getElementById("headline");
+    // headlineDiv.style.display = "none";
     // let obstalcesDiv = document.getElementById("obstacle");
     // obstalcesDiv.style.display = "none";
     // let goodiesDiv = document.getElementById("goodie");
@@ -82,7 +76,7 @@ class Game {
     // let scoreDiv = document.getElementById("score");
     // scoreDiv.style.display = "none";
 
-    // Display game-over divs
+    // Display game-over div
     let gameOverDiv = document.getElementById("game-over");
     gameOverDiv.style.display = "block";
   }
@@ -113,7 +107,7 @@ class Game {
     instance.domElement.style.bottom = instance.positionY + "%";
   }
 
-  removeArrElm(arr, elm) {
+  removeElmFromArr(arr, elm) {
     let index = arr.indexOf(elm);
     if (index > -1) {
       arr.splice(index, 1);
@@ -141,8 +135,8 @@ class Game {
 class Player {
   constructor() {
     this.className = "player";
-    this.width = 6;
-    this.height = 20;
+    this.width = 5;
+    this.height = 12;
     this.positionX = 38;
     this.positionY = 0;
     this.domElement = null;
@@ -161,12 +155,12 @@ class Player {
 
 // Array with 6 different paths for obstacle to start from and moveDown
 let obstaclesPath = [
-  { startPosition: 36, moveDownX: -1.5, moveDownY: 1 },
+  { startPosition: 36, moveDownX: -1, moveDownY: 1 },
   { startPosition: 40, moveDownX: -0.8, moveDownY: 1 },
   { startPosition: 44, moveDownX: -0.3, moveDownY: 1 },
   { startPosition: 48, moveDownX: 0.3, moveDownY: 1 },
   { startPosition: 52, moveDownX: 0.8, moveDownY: 1 },
-  { startPosition: 56, moveDownX: 1.5, moveDownY: 1 },
+  { startPosition: 54, moveDownX: 1, moveDownY: 1 },
 ];
 
 class ParentObstacle {
@@ -176,7 +170,7 @@ class ParentObstacle {
       Math.floor(Math.random() * (Math.floor(6) - Math.ceil(1) + 1)) +
       Math.ceil(1);
     this.positionX = obstaclesPath[this.randomPath].startPosition;
-    this.positionY = 45;
+    this.positionY = 48;
     this.domElement = null;
   }
 
@@ -197,7 +191,7 @@ class Obstacle extends ParentObstacle {
     super(positionX, positionY, width, height, domElement);
     this.className = "obstacle";
     this.width = 3;
-    this.height = 10;
+    this.height = 11;
   }
 }
 
@@ -206,7 +200,7 @@ class Goodie extends ParentObstacle {
     super(positionX, positionY, width, height, domElement);
     this.className = "goodie";
     this.width = 3;
-    this.height = 8;
+    this.height = 9;
   }
 }
 

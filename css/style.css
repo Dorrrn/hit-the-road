@@ -41,8 +41,8 @@ h1 {
 .player {
   position: absolute;
   background-repeat: no-repeat;
-  background-size: 90px;
-  background-image: url("/images/skier-turn-left.svg");
+  background-size: 100%;
+  background-image: url("/images/thunder-car.png");
   /*background-color: rgb(30, 12, 134);*/
   /* todo: resize player ! */
   /*bottom: 0;

@@ -13,18 +13,18 @@ MVP
     [x] class Goodies
 [x] collision with obstacles --> game over
 [x] control with arrow keys --> addEventListeners 
-[] Logic winning/losing
 [x] define Score (calculate, display score)
 [x] collision with goodies -> increase score 
 [x] several random paths for obstacles
     [] make moving down smoother
 [x] images for player, obstacles, goodies
+[] Logic winning/losing
 [] Deploy on GitHub pages
 
 Improvements
+[] Start button or by hitting keys
 [] Obstacles getting bigger, the closer they come
 [] Higher levels (obstacles moving faster)
 [] Distance score
-[] Start button or by hitting keys
 [] Game over screen with displaying Score and level
 
