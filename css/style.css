@@ -27,7 +27,7 @@ h1 {
 
 #board {
   /* todo: make board smaller */
-  background-image: url("/images/board-background2.jpg");
+  background-image: url("../images/board-background2.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -42,7 +42,7 @@ h1 {
   position: absolute;
   background-repeat: no-repeat;
   background-size: 100%;
-  background-image: url("/images/thunder-car.png");
+  background-image: url("../images/thunder-car.png");
   /*background-color: rgb(30, 12, 134);*/
   /* todo: resize player ! */
   /*bottom: 0;
@@ -52,7 +52,7 @@ h1 {
 .obstacle {
   /*todo: replace with tree or so*/
   /*background-color: rgb(141, 8, 8);*/
-  background-image: url("/images/obstacle-red.png");
+  background-image: url("../images/obstacle-red.png");
   position: absolute;
   background-size: 3vw;
   background-repeat: no-repeat;
@@ -60,7 +60,7 @@ h1 {
 
 .goodie {
   /*background-color: rgb(27, 196, 145);*/
-  background-image: url("/images/obstacle-green.png");
+  background-image: url("../images/obstacle-green.png");
   position: absolute;
   background-size: 3vw;
   background-repeat: no-repeat;
