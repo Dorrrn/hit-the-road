@@ -6,9 +6,10 @@ class Game {
     this.score = 0;
     this.intervalId = null;
     this.level = 1;
-    this.refreshRate = 40;
-    this.goodiesFreq = 80;
-    this.obsFreq = 40;
+    this.refreshRate = 60;
+
+    // this.goodiesFreq = 60;
+    // this.obsFreq = 40;
   }
 
   start() {
@@ -22,12 +23,12 @@ class Game {
     this.intervalId = setInterval(() => {
       this.timer++;
 
-      if (this.timer % (this.goodiesFreq * this.level) === 0) {
+      if (this.timer % 30 === 0) {
         const newGoodie = new Goodie();
         this.goodiesArr.push(newGoodie);
         newGoodie.domElement = this.createDomElm(newGoodie);
         this.drawDomElm(newGoodie);
-      } else if (this.timer % (this.obsFreq / this.level) === 0) {
+      } else if (this.timer % 15 === 0) {
         const newObstacle = new Obstacle();
         this.obstaclesArr.push(newObstacle);
         newObstacle.domElement = this.createDomElm(newObstacle);
@@ -54,18 +55,15 @@ class Game {
         }
         elm.removeObstacle(elm);
       });
-    }, this.refreshRate);
+    }, this.refreshRate / this.level);
   }
 
   stop() {
-
-    // alert("Oh noooo.. game over! Let's try better! ")
-    // location.reload();
-
+    alert("Oh noooo.. game over! Let's try better! ");
+    location.reload();
     // let audioGameOver = new Audio("../music/game-over-sound.wav");
     // audioGameOver.loop = false;
     // audioGameOver.play();
-    
     // var r = confirm("Successful Message!");
     // if (r == true) {
     //   window.location.reload();
@@ -124,7 +122,7 @@ class Game {
     audioCountScore.loop = false;
     audioCountScore.play();
 
-    if (this.score % 300 === 0) {
+    if (this.score % 500 === 0) {
       this.level++;
       let audioLevelUp = new Audio("../music/level-up-sound.wav");
       audioLevelUp.loop = false;
@@ -135,8 +133,9 @@ class Game {
   }
 
   playAudio() {
-    // let audio = new Audio("../music/background-sound.mp3");
-    // audio.play();
+    let audio = new Audio("../music/background-sound.mp3");
+    audio.play();
+    audio.volume = 0.1;
   }
 }
 
@@ -161,11 +160,11 @@ class Player {
   }
 }
 
-// Array with 6 different paths for obstacle to start from and moveDown
+// Array with different paths for obstacle to start from and moveDown
 // todo: move into class ParentObstacles
 let obstaclesPath = [
   { startPosition: 38, moveDownX: -1, moveDownY: 1 },
-  //{ startPosition: 43, moveDownX: -0.8, moveDownY: 1 },
+  { startPosition: 43, moveDownX: -0.8, moveDownY: 1 },
   { startPosition: 45, moveDownX: -0.3, moveDownY: 1 },
   { startPosition: 47, moveDownX: 0, moveDownY: 1 },
   //{ startPosition: 49, moveDownX: 0.3, moveDownY: 1 },
