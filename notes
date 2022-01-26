@@ -5,7 +5,7 @@ Idea of game
 
 
 MVP
-[] Playboard: slope, background, border
+[x] Playboard: slope, background, border
 [x] class Game
 [x] class Player
 [x] Parent Class Obstacles
@@ -16,15 +16,15 @@ MVP
 [x] define Score (calculate, display score)
 [x] collision with goodies -> increase score 
 [x] several random paths for obstacles
-    [] make moving down smoother
+    [x] make moving down smoother
 [x] images for player, obstacles, goodies
-[] Logic winning/losing
-[] Deploy on GitHub pages
+[x] Logic winning/losing
+[x] Deploy on GitHub pages
 
 Improvements
 [] Start button or by hitting keys
 [] Obstacles getting bigger, the closer they come
-[] Higher levels (obstacles moving faster)
+[x] Higher levels (obstacles moving faster)
 [] Distance score
 [] Game over screen with displaying Score and level
 

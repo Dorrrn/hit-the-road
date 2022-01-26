@@ -6,16 +6,9 @@ class Game {
     this.score = 0;
     this.intervalId = null;
     this.level = 1;
-    this.refreshRate = 60;
-    this.goodiesFreq = 30;
-    this.obsFreq = 60;
-
-    // this.levels = [
-    //   { level: 1, freqObs: 200, freqGoodies: 400 },
-    //   { level: 2, freqObs: 150, freqGoodies: 450 },
-    //   { level: 3, freqObs: 100, freqGoodies: 500 },
-    //   { level: 4, freqObs: 50, freqGoodies: 550 },
-    // ];
+    this.refreshRate = 40;
+    this.goodiesFreq = 80;
+    this.obsFreq = 40;
   }
 
   start() {
@@ -23,6 +16,7 @@ class Game {
     this.player.domElement = this.createDomElm(this.player);
     this.drawDomElm(this.player);
     this.addEventListeners();
+    this.playAudio();
 
     // setInterval for goodies
     this.intervalId = setInterval(() => {
@@ -64,19 +58,18 @@ class Game {
   }
 
   stop() {
-    //alert("Oh noooooo :(");
-    // Approach 1:
-    //Undisplay divs (player,obs, goodies) from board
-    // let playerDiv = document.getElementById("player");
-    // playerDiv.style.display = "none";
-    // let obsDiv = document.getElementById("obstacle");
-    // obsDiv.style.display = "none";
-    // let goodiesDiv = document.getElementById("goodie");
-    // goodiesDiv.style.display = "none";
-    // // Display game-over div
-    // let gameOverDiv = document.getElementById("game-over");
-    // gameOverDiv.style.display = "block";
-    // Approach 2: Style alertbox
+
+    // alert("Oh noooo.. game over! Let's try better! ")
+    // location.reload();
+
+    // let audioGameOver = new Audio("../music/game-over-sound.wav");
+    // audioGameOver.loop = false;
+    // audioGameOver.play();
+    
+    // var r = confirm("Successful Message!");
+    // if (r == true) {
+    //   window.location.reload();
+    // }
   }
 
   addEventListeners() {
@@ -127,11 +120,23 @@ class Game {
     this.score += 100;
     let score = document.querySelector(".score span");
     score.innerText = this.score;
-    if (this.score % 1000 === 0) {
+    let audioCountScore = new Audio("../music/count-sound.wav");
+    audioCountScore.loop = false;
+    audioCountScore.play();
+
+    if (this.score % 300 === 0) {
       this.level++;
+      let audioLevelUp = new Audio("../music/level-up-sound.wav");
+      audioLevelUp.loop = false;
+      audioLevelUp.play();
     }
     let levelUp = document.querySelector(".level span");
     levelUp.innerText = this.level;
+  }
+
+  playAudio() {
+    // let audio = new Audio("../music/background-sound.mp3");
+    // audio.play();
   }
 }
 
@@ -141,7 +146,7 @@ class Player {
     this.width = 5;
     this.height = 12;
     this.positionX = 38;
-    this.positionY = 0;
+    this.positionY = -5;
     this.domElement = null;
   }
   moveLeft() {
@@ -159,12 +164,13 @@ class Player {
 // Array with 6 different paths for obstacle to start from and moveDown
 // todo: move into class ParentObstacles
 let obstaclesPath = [
-  { startPosition: 36, moveDownX: -1, moveDownY: 1 },
-  { startPosition: 40, moveDownX: -0.8, moveDownY: 1 },
-  { startPosition: 44, moveDownX: -0.3, moveDownY: 1 },
-  { startPosition: 48, moveDownX: 0.3, moveDownY: 1 },
-  { startPosition: 52, moveDownX: 0.8, moveDownY: 1 },
-  { startPosition: 54, moveDownX: 1, moveDownY: 1 },
+  { startPosition: 38, moveDownX: -1, moveDownY: 1 },
+  //{ startPosition: 43, moveDownX: -0.8, moveDownY: 1 },
+  { startPosition: 45, moveDownX: -0.3, moveDownY: 1 },
+  { startPosition: 47, moveDownX: 0, moveDownY: 1 },
+  //{ startPosition: 49, moveDownX: 0.3, moveDownY: 1 },
+  { startPosition: 51, moveDownX: 0.8, moveDownY: 1 },
+  { startPosition: 53, moveDownX: 0.9, moveDownY: 1 },
 ];
 
 class ParentObstacle {
@@ -207,12 +213,6 @@ class Goodie extends ParentObstacle {
     this.height = 9;
   }
 }
-
-// const levels = [
-//     { score: 1500, speed: xx},
-//     { score: 3000, speed: xx},
-//     { score: 5000, speed: xx}
-// ]
 
 const game = new Game();
 game.start();

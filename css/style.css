@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Press+Start+2P");
+
 body {
   padding: 0;
   margin: 0;
@@ -8,14 +10,16 @@ body {
     #2a1839 50%,
     #550d62 100%
   );
+  font-family: "Press Start 2P";
+  font-size: 11px
 }
 
 h1 {
-  font-size: 40px;
+  font-size: 4em;
   color: white;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
   text-transform: uppercase;
+  padding-top: 15px;
 }
 
 #main {
@@ -50,7 +54,6 @@ h1 {
 }
 
 .obstacle {
-  /*todo: replace with tree or so*/
   /*background-color: rgb(141, 8, 8);*/
   background-image: url("../images/obstacle-red.png");
   position: absolute;
@@ -66,13 +69,19 @@ h1 {
   background-repeat: no-repeat;
 }
 
-.score, .level {
+.score {
   text-align: center;
-  padding-top: 10px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 30px;
+  font-size: 2.7em;
   font-weight: 600;
   color: rgb(0, 255, 255);
+}
+
+.level {
+  text-align: center;
+  padding-top: 10px;
+  font-size: 2.2em;
+  font-weight: 600;
+  color: rgb(231, 23, 238);
 }
 
 #game-over {
@@ -84,7 +93,6 @@ h1 {
 #game-over h2 {
   color: white;
   font-size: 30px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
   text-transform: uppercase;
 }
@@ -101,4 +109,3 @@ h1 {
   padding: 15px 20px;
   border-radius: 12px;
 }
-
