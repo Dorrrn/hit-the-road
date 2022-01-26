@@ -4,8 +4,12 @@ class Game {
     this.goodiesArr = [];
     this.timer = 0;
     this.score = 0;
-    // this.refreshRate = 1000 / 5;
-    // this.obstacleFrequency = 10;
+    this.intervalId = null;
+    this.level = 1;
+    this.refreshRate = 60;
+    this.goodiesFreq = 30;
+    this.obsFreq = 60;
+
     // this.levels = [
     //   { level: 1, freqObs: 200, freqGoodies: 400 },
     //   { level: 2, freqObs: 150, freqGoodies: 450 },
@@ -21,16 +25,15 @@ class Game {
     this.addEventListeners();
 
     // setInterval for goodies
-    setInterval(() => {
+    this.intervalId = setInterval(() => {
       this.timer++;
 
-      if (this.timer % 120 === 0) {
+      if (this.timer % (this.goodiesFreq * this.level) === 0) {
         const newGoodie = new Goodie();
         this.goodiesArr.push(newGoodie);
         newGoodie.domElement = this.createDomElm(newGoodie);
         this.drawDomElm(newGoodie);
-
-      } else if (this.timer % 60 === 0) {
+      } else if (this.timer % (this.obsFreq / this.level) === 0) {
         const newObstacle = new Obstacle();
         this.obstaclesArr.push(newObstacle);
         newObstacle.domElement = this.createDomElm(newObstacle);
@@ -52,31 +55,28 @@ class Game {
         elm.moveDown();
         this.drawDomElm(elm);
         if (this.collision(this.player, elm)) {
+          this.stop();
           elm.domElement.remove();
-          //this.stop();
         }
         elm.removeObstacle(elm);
       });
-
-    }, 60);
-
+    }, this.refreshRate);
   }
 
   stop() {
     //alert("Oh noooooo :(");
+    // Approach 1:
     //Undisplay divs (player,obs, goodies) from board
-    let playerDiv = document.getElementById("player");
-    playerDiv.style.display = "none";
-
-    let obsDiv = document.getElementById("obstacle");
-    obsDiv.style.display = "none";
-
-    let goodiesDiv = document.getElementById("goodie");
-    goodiesDiv.style.display = "none";
-
-    // Display game-over div
-    let gameOverDiv = document.getElementById("game-over");
-    gameOverDiv.style.display = "block";
+    // let playerDiv = document.getElementById("player");
+    // playerDiv.style.display = "none";
+    // let obsDiv = document.getElementById("obstacle");
+    // obsDiv.style.display = "none";
+    // let goodiesDiv = document.getElementById("goodie");
+    // goodiesDiv.style.display = "none";
+    // // Display game-over div
+    // let gameOverDiv = document.getElementById("game-over");
+    // gameOverDiv.style.display = "block";
+    // Approach 2: Style alertbox
   }
 
   addEventListeners() {
@@ -127,6 +127,11 @@ class Game {
     this.score += 100;
     let score = document.querySelector(".score span");
     score.innerText = this.score;
+    if (this.score % 1000 === 0) {
+      this.level++;
+    }
+    let levelUp = document.querySelector(".level span");
+    levelUp.innerText = this.level;
   }
 }
 
