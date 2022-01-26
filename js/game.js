@@ -6,6 +6,12 @@ class Game {
     this.score = 0;
     // this.refreshRate = 1000 / 5;
     // this.obstacleFrequency = 10;
+    this.levels = [
+      { level: 1, freqObs: 200, freqGoodies: 400 },
+      { level: 2, freqObs: 150, freqGoodies: 450 },
+      { level: 3, freqObs: 100, freqGoodies: 500 },
+      { level: 4, freqObs: 50, freqGoodies: 550 },
+    ];
   }
 
   start() {
@@ -14,32 +20,11 @@ class Game {
     this.drawDomElm(this.player);
     this.addEventListeners();
 
-    // setInterval for obstacles
-    setInterval(() => {
-      this.timer++;
-
-      if (this.timer % 30 === 0) {
-        const newObstacle = new Obstacle();
-        this.obstaclesArr.push(newObstacle);
-        newObstacle.domElement = this.createDomElm(newObstacle);
-        this.drawDomElm(newObstacle);
-      }
-
-      this.obstaclesArr.forEach((elm) => {
-        elm.moveDown();
-        this.drawDomElm(elm);
-        if (this.collision(this.player, elm)) {
-          //this.stop();
-        }
-        elm.removeObstacle(elm);
-      });
-    }, 80);
-
     // setInterval for goodies
     setInterval(() => {
       this.timer++;
 
-      if (this.timer % 180 === 0) {
+      if (this.timer % 200 === 0) {
         const newGoodie = new Goodie();
         this.goodiesArr.push(newGoodie);
         newGoodie.domElement = this.createDomElm(newGoodie);
@@ -56,6 +41,29 @@ class Game {
         elm.removeObstacle(elm);
       });
     }, 60);
+
+    // setInterval for obstacles
+    // obs: 30/80 ; goodies: 180/60 (<-- this works)
+
+    setInterval(() => {
+      this.timer++;
+
+      if (this.timer % 120 === 0) {
+        const newObstacle = new Obstacle();
+        this.obstaclesArr.push(newObstacle);
+        newObstacle.domElement = this.createDomElm(newObstacle);
+        this.drawDomElm(newObstacle);
+      }
+
+      this.obstaclesArr.forEach((elm) => {
+        elm.moveDown();
+        this.drawDomElm(elm);
+        if (this.collision(this.player, elm)) {
+          //this.stop();
+        }
+        elm.removeObstacle(elm);
+      });
+    }, 60);
   }
 
   stop() {
@@ -64,17 +72,6 @@ class Game {
     // Undisplay divs from board
     let gameDiv = document.getElementById("game");
     gameDiv.style.display = "none";
-
-    // let headlineDiv = document.getElementById("headline");
-    // headlineDiv.style.display = "none";
-    // let obstalcesDiv = document.getElementById("obstacle");
-    // obstalcesDiv.style.display = "none";
-    // let goodiesDiv = document.getElementById("goodie");
-    // goodiesDiv.style.display = "none";
-    // let playerDiv = document.getElementById("player");
-    // playerDiv.style.display = "none";
-    // let scoreDiv = document.getElementById("score");
-    // scoreDiv.style.display = "none";
 
     // Display game-over div
     let gameOverDiv = document.getElementById("game-over");
@@ -142,18 +139,19 @@ class Player {
     this.domElement = null;
   }
   moveLeft() {
-    if (this.positionX > 5) {
-      this.positionX -= 5;
+    if (this.positionX > 3) {
+      this.positionX -= 4;
     }
   }
   moveRight() {
     if (this.positionX < 88) {
-      this.positionX += 5;
+      this.positionX += 4;
     }
   }
 }
 
 // Array with 6 different paths for obstacle to start from and moveDown
+// todo: move into class ParentObstacles
 let obstaclesPath = [
   { startPosition: 36, moveDownX: -1, moveDownY: 1 },
   { startPosition: 40, moveDownX: -0.8, moveDownY: 1 },
