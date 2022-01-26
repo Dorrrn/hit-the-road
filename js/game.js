@@ -6,12 +6,12 @@ class Game {
     this.score = 0;
     // this.refreshRate = 1000 / 5;
     // this.obstacleFrequency = 10;
-    this.levels = [
-      { level: 1, freqObs: 200, freqGoodies: 400 },
-      { level: 2, freqObs: 150, freqGoodies: 450 },
-      { level: 3, freqObs: 100, freqGoodies: 500 },
-      { level: 4, freqObs: 50, freqGoodies: 550 },
-    ];
+    // this.levels = [
+    //   { level: 1, freqObs: 200, freqGoodies: 400 },
+    //   { level: 2, freqObs: 150, freqGoodies: 450 },
+    //   { level: 3, freqObs: 100, freqGoodies: 500 },
+    //   { level: 4, freqObs: 50, freqGoodies: 550 },
+    // ];
   }
 
   start() {
@@ -24,12 +24,19 @@ class Game {
     setInterval(() => {
       this.timer++;
 
-      if (this.timer % 200 === 0) {
+      if (this.timer % 120 === 0) {
         const newGoodie = new Goodie();
         this.goodiesArr.push(newGoodie);
         newGoodie.domElement = this.createDomElm(newGoodie);
         this.drawDomElm(newGoodie);
+
+      } else if (this.timer % 60 === 0) {
+        const newObstacle = new Obstacle();
+        this.obstaclesArr.push(newObstacle);
+        newObstacle.domElement = this.createDomElm(newObstacle);
+        this.drawDomElm(newObstacle);
       }
+
       this.goodiesArr.forEach((elm) => {
         elm.moveDown();
         this.drawDomElm(elm);
@@ -40,38 +47,32 @@ class Game {
         }
         elm.removeObstacle(elm);
       });
-    }, 60);
-
-    // setInterval for obstacles
-    // obs: 30/80 ; goodies: 180/60 (<-- this works)
-
-    setInterval(() => {
-      this.timer++;
-
-      if (this.timer % 120 === 0) {
-        const newObstacle = new Obstacle();
-        this.obstaclesArr.push(newObstacle);
-        newObstacle.domElement = this.createDomElm(newObstacle);
-        this.drawDomElm(newObstacle);
-      }
 
       this.obstaclesArr.forEach((elm) => {
         elm.moveDown();
         this.drawDomElm(elm);
         if (this.collision(this.player, elm)) {
+          elm.domElement.remove();
           //this.stop();
         }
         elm.removeObstacle(elm);
       });
+
     }, 60);
+
   }
 
   stop() {
     //alert("Oh noooooo :(");
+    //Undisplay divs (player,obs, goodies) from board
+    let playerDiv = document.getElementById("player");
+    playerDiv.style.display = "none";
 
-    // Undisplay divs from board
-    let gameDiv = document.getElementById("game");
-    gameDiv.style.display = "none";
+    let obsDiv = document.getElementById("obstacle");
+    obsDiv.style.display = "none";
+
+    let goodiesDiv = document.getElementById("goodie");
+    goodiesDiv.style.display = "none";
 
     // Display game-over div
     let gameOverDiv = document.getElementById("game-over");
