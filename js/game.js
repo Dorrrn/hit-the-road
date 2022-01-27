@@ -118,13 +118,13 @@ class Game {
     this.score += 100;
     let score = document.querySelector(".score span");
     score.innerText = this.score;
-    let audioCountScore = new Audio("./../music/count-sound.wav");
+    let audioCountScore = new Audio("../js/count-sound.wav");
     audioCountScore.loop = false;
     audioCountScore.play();
 
     if (this.score % 500 === 0) {
       this.level++;
-      let audioLevelUp = new Audio("./../music/level-up-sound.wav");
+      let audioLevelUp = new Audio("../js/level-up-sound.wav");
       audioLevelUp.loop = false;
       audioLevelUp.play();
     }
