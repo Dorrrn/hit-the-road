@@ -22,9 +22,9 @@ MVP
 [x] Deploy on GitHub pages
 
 Improvements
+[x] Higher levels (obstacles moving faster)
+[x] Game over screen with displaying Score and level
 [] Start button or by hitting keys
 [] Obstacles getting bigger, the closer they come
-[x] Higher levels (obstacles moving faster)
 [] Distance score
-[] Game over screen with displaying Score and level
 

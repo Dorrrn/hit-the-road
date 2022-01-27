@@ -10,7 +10,7 @@ class Game {
     this.refreshRate = 60;
 
     this.goodiesFreq = 30;
-    this.obsFreq = 40;
+    this.obsFreq = 30;
   }
 
   start() {
