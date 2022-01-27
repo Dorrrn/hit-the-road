@@ -6,8 +6,10 @@ class Game {
     this.score = 0;
     this.intervalId = null;
     this.level = 1;
+
     this.refreshRate = 60;
-    this.goodiesFreq = 60;
+
+    this.goodiesFreq = 30;
     this.obsFreq = 40;
   }
 
@@ -58,7 +60,7 @@ class Game {
   }
 
   stop() {
-    if (alert("Alert For your User!")) {
+    if (alert("Oh noooo.. game over :( ")) {
     } else window.location.reload();
 
     // if (confirm("Oh noooo.. game over! Do you want to play again?") === true) {
