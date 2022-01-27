@@ -17,7 +17,7 @@ class Game {
     this.player.domElement = this.createDomElm(this.player);
     this.drawDomElm(this.player);
     this.addEventListeners();
-    this.playAudio();
+    //this.playAudio();
 
     // setInterval for goodies
     this.intervalId = setInterval(() => {
@@ -61,13 +61,6 @@ class Game {
   stop() {
     alert("Oh noooo.. game over! Let's try better! ");
     location.reload();
-    // let audioGameOver = new Audio("../music/game-over-sound.wav");
-    // audioGameOver.loop = false;
-    // audioGameOver.play();
-    // var r = confirm("Successful Message!");
-    // if (r == true) {
-    //   window.location.reload();
-    // }
   }
 
   addEventListeners() {
@@ -132,11 +125,11 @@ class Game {
     levelUp.innerText = this.level;
   }
 
-  playAudio() {
-    let audio = new Audio("../music/background-sound.mp3");
-    audio.play();
-    audio.volume = 0.1;
-  }
+  // playAudio() {
+  //   let audio = new Audio("../music/background-sound.mp3");
+  //   audio.play();
+  //   audio.volume = 0.1;
+  // }
 }
 
 class Player {
