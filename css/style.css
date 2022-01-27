@@ -85,16 +85,17 @@ h1 {
 }
 
 #game-over {
-  display: none;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
+  display: none;
 }
 
-#game-over h2 {
+#game-over p {
   color: white;
   font-size: 30px;
-  text-align: center;
+  text-align: center;;
   text-transform: uppercase;
+  
 }
 
 #game-over button {
@@ -103,9 +104,9 @@ h1 {
     rgba(245, 116, 185, 1) 14.7%,
     rgba(89, 97, 223, 1) 88.7%
   );
-  font-size: 20px;
+  font-size: 30px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: white;
-  padding: 15px 20px;
+  padding: 15px 30px;
   border-radius: 12px;
 }

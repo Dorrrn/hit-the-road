@@ -19,8 +19,8 @@ class Game {
     this.drawDomElm(this.player);
     this.addEventListeners();
     //this.playAudio();
+    document.getElementById("game-over").style.display = "none";
 
-    // setInterval for goodies
     this.intervalId = setInterval(() => {
       this.timer++;
 
@@ -60,8 +60,9 @@ class Game {
   }
 
   stop() {
-    if (alert("Oh noooo.. game over :( ")) {
-    } else window.location.reload();
+    document.getElementById("board").style.display = "none";
+    document.getElementById("game-over").style.display = "block";
+    clearInterval(this.intervalId);
 
     // if (confirm("Oh noooo.. game over! Do you want to play again?") === true) {
     //   setTimeout(() => {
