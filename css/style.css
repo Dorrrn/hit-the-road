@@ -84,12 +84,6 @@ h1 {
   color: rgb(231, 23, 238);
 }
 
-#instructions {
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-}
-
 #game-over {
   display: none;
   align-items: center;
