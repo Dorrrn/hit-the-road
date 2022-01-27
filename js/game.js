@@ -118,13 +118,13 @@ class Game {
     this.score += 100;
     let score = document.querySelector(".score span");
     score.innerText = this.score;
-    let audioCountScore = new Audio("/music/count-sound.wav");
+    let audioCountScore = new Audio("./../music/count-sound.wav");
     audioCountScore.loop = false;
     audioCountScore.play();
 
     if (this.score % 500 === 0) {
       this.level++;
-      let audioLevelUp = new Audio("/music/level-up-sound.wav");
+      let audioLevelUp = new Audio("./../music/level-up-sound.wav");
       audioLevelUp.loop = false;
       audioLevelUp.play();
     }
@@ -133,7 +133,7 @@ class Game {
   }
 
   // playAudio() {
-  //   let audio = new Audio("/music/background-sound.mp3");
+  //   let audio = new Audio("./../music/background-sound.mp3");
   //   audio.play();
   //   audio.volume = 0.1;
   // }
