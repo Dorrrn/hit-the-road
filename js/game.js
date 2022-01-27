@@ -7,9 +7,8 @@ class Game {
     this.intervalId = null;
     this.level = 1;
     this.refreshRate = 60;
-
-    // this.goodiesFreq = 60;
-    // this.obsFreq = 40;
+    this.goodiesFreq = 60;
+    this.obsFreq = 40;
   }
 
   start() {
@@ -23,12 +22,12 @@ class Game {
     this.intervalId = setInterval(() => {
       this.timer++;
 
-      if (this.timer % 30 === 0) {
+      if (this.timer % Math.floor(this.goodiesFreq * this.level) === 0) {
         const newGoodie = new Goodie();
         this.goodiesArr.push(newGoodie);
         newGoodie.domElement = this.createDomElm(newGoodie);
         this.drawDomElm(newGoodie);
-      } else if (this.timer % 15 === 0) {
+      } else if (this.timer % Math.floor(this.obsFreq / this.level) === 0) {
         const newObstacle = new Obstacle();
         this.obstaclesArr.push(newObstacle);
         newObstacle.domElement = this.createDomElm(newObstacle);
@@ -59,8 +58,16 @@ class Game {
   }
 
   stop() {
-    alert("Oh noooo.. game over! Let's try better! ");
-    location.reload();
+    if (alert("Alert For your User!")) {
+    } else window.location.reload();
+
+    // if (confirm("Oh noooo.. game over! Do you want to play again?") === true) {
+    //   setTimeout(() => {
+    //     location.reload();
+    //   }, 1000);
+    // } else {
+    //   //
+    // }
   }
 
   addEventListeners() {
@@ -111,13 +118,13 @@ class Game {
     this.score += 100;
     let score = document.querySelector(".score span");
     score.innerText = this.score;
-    let audioCountScore = new Audio("../music/count-sound.wav");
+    let audioCountScore = new Audio("/music/count-sound.wav");
     audioCountScore.loop = false;
     audioCountScore.play();
 
     if (this.score % 500 === 0) {
       this.level++;
-      let audioLevelUp = new Audio("../music/level-up-sound.wav");
+      let audioLevelUp = new Audio("/music/level-up-sound.wav");
       audioLevelUp.loop = false;
       audioLevelUp.play();
     }
@@ -126,7 +133,7 @@ class Game {
   }
 
   // playAudio() {
-  //   let audio = new Audio("../music/background-sound.mp3");
+  //   let audio = new Audio("/music/background-sound.mp3");
   //   audio.play();
   //   audio.volume = 0.1;
   // }
