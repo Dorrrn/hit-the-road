@@ -29,7 +29,7 @@ class Game {
         this.goodiesArr.push(newGoodie);
         newGoodie.domElement = this.createDomElm(newGoodie);
         this.drawDomElm(newGoodie);
-      } else if (this.timer % Math.floor(this.obsFreq / this.level) === 0) {
+      } else if (this.timer % Math.floor(this.obsFreq / this.level / 2) === 0) {
         const newObstacle = new Obstacle();
         this.obstaclesArr.push(newObstacle);
         newObstacle.domElement = this.createDomElm(newObstacle);
@@ -153,12 +153,12 @@ class Player {
   }
   moveLeft() {
     if (this.positionX > 3) {
-      this.positionX -= 4;
+      this.positionX -= 1.5;
     }
   }
   moveRight() {
     if (this.positionX < 88) {
-      this.positionX += 4;
+      this.positionX += 1.5;
     }
   }
 }
