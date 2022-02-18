@@ -1,4 +1,4 @@
-# Getting started:
+# Getting started
 
 Once you opened the game, it will start automatically.
 Your goal is to collect green goodies, which will increase your score and level certain points.
@@ -14,7 +14,7 @@ https://dorrrn.github.io/hit-the-road/
 2. Clone repo
 3. Open index.html in Browser-Live-Server for testing
 
-# Contributing:
+# Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
 If you have a suggestion that would make this better, please fork the repo and create a pull request.
