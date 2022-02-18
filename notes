@@ -1,7 +1,7 @@
 Idea of game
--- Skier hitting down the slope, while avoiding obstacles and collecting goods;
--- Score (distance and collecting goods; high scores; 
--- Different levels (blue, red, black slope --> more obstacles, faster slope)
+-- Car driving along the road collecting goodies, while trying to avoid obstacles
+-- Score when collecting goodies and level up, when reaching certain points
+-- When level up, obstacles coming faster and more often
 
 
 MVP
@@ -28,3 +28,60 @@ Improvements
 [] Obstacles getting bigger, the closer they come
 [] Distance score
 
+
+
+
+# Review from Karina
+
+//////////
+1. Instead of creating new class, you could just create new instance of ParentObstacles by passing specific parameters you need. 
+So for example see below. Also you would need to pass these arguments in ParentObstacle constructor ;)
+// OLD
+class Obstacle extends ParentObstacle {
+  constructor(positionX, positionY, width, height, domElement) {
+    super(positionX, positionY, width, height, domElement);
+    this.className = "obstacle";
+    this.width = 3;
+    this.height = 11;
+  }
+}
+
+// NEW
+const obstacle = new ParentObstacle('obstacle', 3, 11)
+
+class ParentObstacle {
+  constructor(className, width, height) {}
+
+//////////
+2. Also, if you have only one class for moving objects, you could refactor code below. 
+You could extract below repeating logic into a function
+// OLD
+
+      if (this.timer % Math.floor(this.goodiesFreq * this.level) === 0) {
+        const newGoodie = new Goodie();
+        this.goodiesArr.push(newGoodie);
+        newGoodie.domElement = this.createDomElm(newGoodie);
+        this.drawDomElm(newGoodie);
+      } else if (this.timer % Math.floor(this.obsFreq / this.level / 2) === 0) {
+        const newObstacle = new Obstacle();
+        this.obstaclesArr.push(newObstacle);
+        newObstacle.domElement = this.createDomElm(newObstacle);
+        this.drawDomElm(newObstacle);
+      }
+
+// NEW
+
+createMovingElement(instance) {
+        const instance = new Goodie();
+        this.goodiesArr.push(instance);
+        instance.domElement = this.createDomElm(instance);
+        this.drawDomElm(instance);
+}
+
+<...>
+      if (this.timer % Math.floor(this.goodiesFreq * this.level) === 0) {
+           createMovingElement(newGoodie) 
+      }  else if (this.timer % Math.floor(this.obsFreq / this.level / 2) === 0) {
+           createMovingElement(newObstacle) 
+      }
+<...>
