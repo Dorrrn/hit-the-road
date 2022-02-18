@@ -6,9 +6,7 @@ class Game {
     this.score = 0;
     this.intervalId = null;
     this.level = 1;
-
     this.refreshRate = 60;
-
     this.goodiesFreq = 30;
     this.obsFreq = 30;
   }
@@ -63,14 +61,6 @@ class Game {
     document.getElementById("board").style.display = "none";
     document.getElementById("game-over").style.display = "block";
     clearInterval(this.intervalId);
-
-    // if (confirm("Oh noooo.. game over! Do you want to play again?") === true) {
-    //   setTimeout(() => {
-    //     location.reload();
-    //   }, 1000);
-    // } else {
-    //   //
-    // }
   }
 
   addEventListeners() {
@@ -121,13 +111,13 @@ class Game {
     this.score += 100;
     let score = document.querySelector(".score span");
     score.innerText = this.score;
-    let audioCountScore = new Audio("../music/count-sound.wav");
+    let audioCountScore = new Audio("/music/count-sound.wav");
     audioCountScore.loop = false;
     audioCountScore.play();
 
     if (this.score % 500 === 0) {
       this.level++;
-      let audioLevelUp = new Audio("../music/level-up-sound.wav");
+      let audioLevelUp = new Audio("/music/level-up-sound.wav");
       audioLevelUp.loop = false;
       audioLevelUp.play();
     }
@@ -136,7 +126,7 @@ class Game {
   }
 
   // playAudio() {
-  //   let audio = new Audio("./../music/background-sound.mp3");
+  //   let audio = new Audio("/music/background-sound.mp3");
   //   audio.play();
   //   audio.volume = 0.1;
   // }
