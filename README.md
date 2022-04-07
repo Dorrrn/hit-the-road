@@ -1,5 +1,5 @@
 # About
-This is my first game, created after 2 weeks of learning coding durin ironhack bootcamp.
+This is my first game, created after 2 weeks of learning coding during ironhack bootcamp.
 
 # Link to demo
 https://dorrrn.github.io/hit-the-road/
