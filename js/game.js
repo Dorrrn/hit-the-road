@@ -130,6 +130,7 @@ class Game {
   //   audio.play();
   //   audio.volume = 0.1;
   // }
+  
 }
 
 class Player {
@@ -153,21 +154,17 @@ class Player {
   }
 }
 
-// Array with different paths for obstacle to start from and moveDown
-// todo: move into class ParentObstacles
 let obstaclesPath = [
   { startPosition: 38, moveDownX: -1, moveDownY: 1 },
   { startPosition: 43, moveDownX: -0.8, moveDownY: 1 },
   { startPosition: 45, moveDownX: -0.3, moveDownY: 1 },
   { startPosition: 47, moveDownX: 0, moveDownY: 1 },
-  //{ startPosition: 49, moveDownX: 0.3, moveDownY: 1 },
   { startPosition: 51, moveDownX: 0.8, moveDownY: 1 },
   { startPosition: 53, moveDownX: 0.9, moveDownY: 1 },
 ];
 
 class ParentObstacle {
   constructor() {
-    // random number between 1-6
     this.randomPath =
       Math.floor(Math.random() * (Math.floor(6) - Math.ceil(1) + 1)) +
       Math.ceil(1);
